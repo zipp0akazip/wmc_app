@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/test', function(Request $request) {
+    return 123;
 });
+
+Route::prefix('v1')->group(function () {
+    Route::rpc('/user', [\App\Http\Procedures\UserProcedure::class])
+        ->name('rpc.user')
+        ->middleware(['auth:api']);
+
+    Route::rpc('/test', [\App\Http\Procedures\TestProcedure::class])
+        ->name('rpc.test')
+        ->middleware(['auth:api', 'can:tracks:view']);
+});
+
