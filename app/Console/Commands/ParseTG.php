@@ -2,8 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Telegram;
-use danog\MadelineProto\Logger;
+use App\Sources\Telegram;
 use Illuminate\Console\Command;
 
 class ParseTG extends Command
@@ -25,7 +24,7 @@ class ParseTG extends Command
     /**
      * @var Telegram
      */
-    private Telegram $telegramService;
+    private Telegram $source;
 
     /**
      * Create a new command instance.
@@ -38,7 +37,7 @@ class ParseTG extends Command
     {
         parent::__construct();
 
-        $this->telegramService = $telegram;
+        $this->source = $telegram;
     }
 
     /**
@@ -51,7 +50,7 @@ class ParseTG extends Command
         if ($this->option('create-session')) {
             $this->createSession();
         } else {
-            $this->telegramService->getHistory();
+            $this->source->getHistory();
         }
     }
 
@@ -60,6 +59,6 @@ class ParseTG extends Command
      */
     private function createSession(): void
     {
-        $this->telegramService->createSessionFile();
+        $this->source->createSessionFile();
     }
 }
