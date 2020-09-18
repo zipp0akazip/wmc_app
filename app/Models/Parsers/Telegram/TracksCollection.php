@@ -10,4 +10,15 @@ class TracksCollection
     {
         $this->tracks[] = $track;
     }
+
+    public function toArray(): array
+    {
+        $result = [];
+
+        foreach ($this->tracks as $track) {
+            $result[] = $track->toArray();
+        }
+
+        return $result;
+    }
 }

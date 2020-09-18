@@ -12,4 +12,12 @@ class Track
         $this->artist = $data['performer'];
         $this->title = $data['title'];
     }
+
+    public function toArray(): array
+    {
+        return [
+            'artist' => $this->artist,
+            'title' => $this->title,
+        ];
+    }
 }

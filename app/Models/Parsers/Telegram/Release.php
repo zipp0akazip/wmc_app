@@ -23,4 +23,12 @@ class Release
     {
          return $this->tracks;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'cover' => $this->cover->toArray(),
+            'tracks' => $this->tracks->toArray(),
+        ];
+    }
 }

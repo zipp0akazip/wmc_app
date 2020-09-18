@@ -26,36 +26,39 @@ class Telegram
     {
         if ($this->isFirstMessageValid($messages)) {
             foreach ($messages as $rowNumber => $message) {
-                switch ($this->getMessageType($message)) {
-                    case MessageTypeEnum::COVER:
-                        if (!is_null($this->currentRelease)) {
-                            $this->releases->add($this->currentRelease);
-                            $this->currentRelease = null;
-                        }
-                        $this->handleCover($message);
-                        break;
-                    case MessageTypeEnum::TRACK:
-                        $this->handleTrack($message);
-                        break;
-                    case MessageTypeEnum::VIDEO:
-                        if (!is_null($this->currentRelease)) {
-                            $this->releases->add($this->currentRelease);
-                            $this->currentRelease = null;
-                        }
-                        break;
-                    case MessageTypeEnum::NONE:
-                        throw new Exception('Can not receive message type ' . json_encode($message));
-                }
-
-                if (count($messages) - 1 === $rowNumber) {
-                    $this->releases->add($this->currentRelease);
-                }
+                var_dump($message['id']);
+//                switch ($this->getMessageType($message)) {
+//                    case MessageTypeEnum::COVER:
+//                        if (!is_null($this->currentRelease)) {
+//                            $this->releases->add($this->currentRelease);
+//                            $this->currentRelease = null;
+//                        }
+//                        $this->handleCover($message);
+//                        break;
+//                    case MessageTypeEnum::TRACK:
+//                        $this->handleTrack($message);
+//                        break;
+//                    case MessageTypeEnum::VIDEO:
+//                        if (!is_null($this->currentRelease)) {
+//                            $this->releases->add($this->currentRelease);
+//                            $this->currentRelease = null;
+//                        }
+//                        break;
+//                    case MessageTypeEnum::NONE:
+//                        throw new Exception('Can not receive message type ' . json_encode($message));
+//                }
+//
+//                if (count($messages) - 1 === $rowNumber) {
+//                    $this->releases->add($this->currentRelease);
+//                }
             }
         } else {
             throw new \Exception('Messages are not starting from COVER.');
         }
-
-        var_dump($this->releases);exit;
+exit;
+        $ser = serialize($this->releases);
+        $unser = unserialize($ser);
+        var_dump($unser->toArray());exit;
     }
 
     private function getMessageType(array $message): string

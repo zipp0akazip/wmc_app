@@ -52,7 +52,6 @@ final class Telegram
         $messages = array_reverse($data['messages']);
 
         $this->parser->handleRawMessages($messages);
-
     }
 
     public function createSessionFile(): void

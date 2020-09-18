@@ -4,6 +4,7 @@ namespace App\Models\Parsers\Telegram;
 
 class Cover
 {
+    private ?int $
     private ?string $artist;
     private ?string $name;
     private ?string $label;
@@ -46,5 +47,16 @@ class Cover
 
         $this->artist = trim($artist);
         $this->name = trim($name);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'artist' => $this->artist,
+            'name' => $this->name,
+            'label' => $this->label,
+            'date' => $this->date,
+            'styles' => $this->styles,
+        ];
     }
 }
