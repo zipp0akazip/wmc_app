@@ -4,6 +4,8 @@ namespace App\Models\Enums;
 
 final class PermissionEnum extends BaseEnum
 {
+    const RawReleaseList = 'raw_release:view';
+
     const TracksView = 'tracks:view';
     const TracksAdd = 'tracks:add';
 

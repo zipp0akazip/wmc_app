@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Enums\PermissionEnum;
+use App\Http\Procedures;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function(Request $request) {
-    return 123;
-});
-
 Route::prefix('v1')->group(function () {
-    Route::rpc('/user', [\App\Http\Procedures\UserProcedure::class])
+    Route::rpc('/user', [Procedures\UserProcedure::class])
         ->name('rpc.user')
         ->middleware(['auth:api']);
 
-    Route::rpc('/test', [\App\Http\Procedures\TestProcedure::class])
+    Route::rpc('/test', [Procedures\TestProcedure::class])
         ->name('rpc.test')
         ->middleware(['auth:api', 'can:tracks:view']);
+
+    Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class])
+        ->name('raw-releases.list')
+        ->middleware(['auth:api', 'can:' . PermissionEnum::RawReleaseList]);
 });
 

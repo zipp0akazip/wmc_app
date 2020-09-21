@@ -50,7 +50,7 @@ class ParseTG extends Command
         if ($this->option('create-session')) {
             $this->createSession();
         } else {
-            $this->source->getHistory();
+            $this->source->handleHistory();
         }
     }
 

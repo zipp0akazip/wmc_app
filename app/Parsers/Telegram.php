@@ -22,43 +22,40 @@ class Telegram
         $this->releases = $releases;
     }
 
-    public function handleRawMessages(array $messages)
+    public function handleRawMessages(array $messages): ReleasesCollection
     {
         if ($this->isFirstMessageValid($messages)) {
             foreach ($messages as $rowNumber => $message) {
-                var_dump($message['id']);
-//                switch ($this->getMessageType($message)) {
-//                    case MessageTypeEnum::COVER:
-//                        if (!is_null($this->currentRelease)) {
-//                            $this->releases->add($this->currentRelease);
-//                            $this->currentRelease = null;
-//                        }
-//                        $this->handleCover($message);
-//                        break;
-//                    case MessageTypeEnum::TRACK:
-//                        $this->handleTrack($message);
-//                        break;
-//                    case MessageTypeEnum::VIDEO:
-//                        if (!is_null($this->currentRelease)) {
-//                            $this->releases->add($this->currentRelease);
-//                            $this->currentRelease = null;
-//                        }
-//                        break;
-//                    case MessageTypeEnum::NONE:
-//                        throw new Exception('Can not receive message type ' . json_encode($message));
-//                }
-//
-//                if (count($messages) - 1 === $rowNumber) {
-//                    $this->releases->add($this->currentRelease);
-//                }
+                switch ($this->getMessageType($message)) {
+                    case MessageTypeEnum::COVER:
+                        if (!is_null($this->currentRelease)) {
+                            $this->releases->add($this->currentRelease);
+                            $this->currentRelease = null;
+                        }
+                        $this->handleCover($message);
+                        break;
+                    case MessageTypeEnum::TRACK:
+                        $this->handleTrack($message);
+                        break;
+                    case MessageTypeEnum::VIDEO:
+                        if (!is_null($this->currentRelease)) {
+                            $this->releases->add($this->currentRelease);
+                            $this->currentRelease = null;
+                        }
+                        break;
+                    case MessageTypeEnum::NONE:
+                        throw new Exception('Can not receive message type ' . json_encode($message));
+                }
+
+                if (count($messages) - 1 === $rowNumber && $this->currentRelease !== null) {
+                    $this->releases->add($this->currentRelease);
+                }
             }
         } else {
-            throw new \Exception('Messages are not starting from COVER.');
+            throw new \Exception('Messages are not starting from COVER. ' . json_encode($messages[0]));
         }
-exit;
-        $ser = serialize($this->releases);
-        $unser = unserialize($ser);
-        var_dump($unser->toArray());exit;
+
+        return $this->releases;
     }
 
     private function getMessageType(array $message): string
@@ -97,15 +94,15 @@ exit;
     {
         $this->currentRelease = new Release();
 
-        $this->currentRelease->getCover()->setDataFromMessage($message['message']);
+        $this->currentRelease->getCover()->setDataFromMessage($message);
     }
 
     private function handleTrack(array $message): void
     {
-        foreach ($message['media']['document']['attributes'] as $attribute) {
-            if ($attribute['_'] === DocumentAttributeTypeEnum::AUDIO) {
+        foreach ($message['media']['document']['attributes'] as $attributeNumber => $attributeData) {
+            if ($attributeData['_'] === DocumentAttributeTypeEnum::AUDIO) {
                 $track = new Track();
-                $track->setDataFromMessage($attribute);
+                $track->setDataFromMessage($message, $attributeNumber);
 
                 $this->currentRelease->getTracksCollection()->add($track);
             }

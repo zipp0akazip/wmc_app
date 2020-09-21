@@ -4,18 +4,21 @@ namespace App\Models\Parsers\Telegram;
 
 class Cover
 {
-    private ?int $
+    private ?int $originalId;
     private ?string $artist;
     private ?string $name;
     private ?string $label;
     private ?string $date;
     private ?array $styles;
 
-    public function setDataFromMessage(string $message): void
+    public function setDataFromMessage(array $message): void
     {
-        $messageLower = strtolower($message);
+        $textMessage = $message['message'];
 
-        $parts = explode(PHP_EOL, $message);
+        $this->originalId = $message['id'];
+
+        $messageLower = strtolower($textMessage);
+        $parts = explode(PHP_EOL, $textMessage);
         $partsLower = explode(PHP_EOL, $messageLower);
 
         $handledParts = [];
@@ -34,6 +37,7 @@ class Cover
                 $styles = str_ireplace(['style:', 'style'], '', $parts[$stringNumber]);
                 $styles = trim($styles);
                 $styles = explode('#', $styles);
+                $styles = array_map(fn($value) => str_replace([','], '', $value), $styles);
                 $styles = array_map('trim', $styles);
                 $styles = array_filter($styles, fn($value) => !is_null($value) && $value !== '');
 
@@ -52,6 +56,7 @@ class Cover
     public function toArray(): array
     {
         return [
+            'original_id' => $this->originalId,
             'artist' => $this->artist,
             'name' => $this->name,
             'label' => $this->label,

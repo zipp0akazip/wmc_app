@@ -26,4 +26,9 @@ class ReleasesCollection
     {
         return json_encode($this->toArray());
     }
+
+    public function getAll(): array
+    {
+        return $this->releases;
+    }
 }
