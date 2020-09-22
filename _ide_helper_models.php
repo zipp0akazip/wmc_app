@@ -20,15 +20,15 @@ namespace App\Models{
  * @property string|null $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases query()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereRelease($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleases whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereRelease($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereUpdatedAt($value)
  */
 	class RawReleases extends \Eloquent {}
 }
@@ -55,19 +55,19 @@ namespace App\Models{
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read int|null $tokens_count
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserModel whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class User extends \Eloquent {}

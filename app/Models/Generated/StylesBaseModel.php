@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Generated;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RawReleases extends Model
+class StylesBaseModel extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'data', 'status', 'message',
-    ];
+    protected $table = 'styles';
 }

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Procedures;
 
 use App\Models\Enums\RawReleasesStatusEnum;
-use App\Models\RawReleases;
-use Illuminate\Http\Request;
+use App\Models\RawReleasesModel;
 use Sajya\Server\Procedure;
 
 class RawReleasesProcedure extends Procedure
@@ -19,12 +18,15 @@ class RawReleasesProcedure extends Procedure
      */
     public static string $name = 'raw-releases';
 
-    public function list()
+    public function list(): array
     {
-        $releases = RawReleases::where('status', RawReleasesStatusEnum::NEW)->get();
+        $result = [];
+        $releases = RawReleasesModel::where('status', RawReleasesStatusEnum::NEW)->get();
 
         foreach ($releases as $release) {
-            var_dump(unserialize(base64_decode($release->data)));exit;
+            $result[] = $release->data->toArray();
         }
+
+        return $result;
     }
 }

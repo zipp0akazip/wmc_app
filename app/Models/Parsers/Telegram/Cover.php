@@ -9,7 +9,12 @@ class Cover
     private ?string $name;
     private ?string $label;
     private ?string $date;
-    private ?array $styles;
+    private StylesCollection $styles;
+
+    public function __construct()
+    {
+        $this->styles = new StylesCollection();
+    }
 
     public function setDataFromMessage(array $message): void
     {
@@ -34,23 +39,22 @@ class Cover
             }
 
             if (strpos($stringLower, 'style') !== false) {
-                $styles = str_ireplace(['style:', 'style'], '', $parts[$stringNumber]);
-                $styles = trim($styles);
-                $styles = explode('#', $styles);
-                $styles = array_map(fn($value) => str_replace([','], '', $value), $styles);
-                $styles = array_map('trim', $styles);
-                $styles = array_filter($styles, fn($value) => !is_null($value) && $value !== '');
+                $this->styles->fillByString($parts[$stringNumber]);
 
-                $this->styles = $styles;
                 $handledParts[] = $stringNumber;
             }
         }
 
         $remainingParts = array_diff_key($parts, array_flip($handledParts));
-        list($artist, $name) = preg_split('/[вЂ“|-]+/', array_shift($remainingParts));
+        list($artist, $name) = preg_split('/[—|–|-]+/', array_shift($remainingParts));
 
         $this->artist = trim($artist);
         $this->name = trim($name);
+    }
+
+    public function getStylesCollection(): StylesCollection
+    {
+        return $this->styles;
     }
 
     public function toArray(): array

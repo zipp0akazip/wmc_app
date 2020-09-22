@@ -17,16 +17,11 @@ use App\Http\Procedures;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::rpc('/user', [Procedures\UserProcedure::class])
-        ->name('rpc.user')
-        ->middleware(['auth:api']);
-
-    Route::rpc('/test', [Procedures\TestProcedure::class])
-        ->name('rpc.test')
-        ->middleware(['auth:api', 'can:tracks:view']);
-
-    Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class])
-        ->name('raw-releases.list')
-        ->middleware(['auth:api', 'can:' . PermissionEnum::RawReleaseList]);
+    Route::middleware(['auth:api'])->group(function () {
+        Route::rpc('/user', [Procedures\UserProcedure::class])->name('rpc.user');
+        Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class])->name('rpc.raw-releases');
+        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStylesProcedure::class])->name('rpc.unapproved-styles');
+        Route::rpc('/styles', [Procedures\StylesProcedure::class])->name('rpc.styles');
+    });
 });
 

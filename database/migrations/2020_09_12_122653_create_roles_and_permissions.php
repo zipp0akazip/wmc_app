@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use App\Models\User;
+use App\Models\UserModel;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -16,13 +16,13 @@ class CreateRolesAndPermissions extends Migration
      */
     public function up()
     {
-        $rootUser = new User();
+        $rootUser = new UserModel();
         $rootUser->name = 'Root admin';
         $rootUser->email = 'root@admin.loc';
         $rootUser->password = Hash::make('qweasdzxc');
         $rootUser->save();
 
-        $simpleUser = new User();
+        $simpleUser = new UserModel();
         $simpleUser->name = 'Simple user';
         $simpleUser->email = 'simple@user.loc';
         $simpleUser->password = Hash::make('qweasdzxc');

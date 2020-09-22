@@ -3,7 +3,7 @@
 namespace App\Sources;
 
 use App\Models\Enums\RawReleasesStatusEnum;
-use App\Models\RawReleases;
+use App\Models\RawReleasesModel;
 use danog\MadelineProto\API;
 use danog\MadelineProto\Logger;
 use danog\MadelineProto\Exception as MadelineProtoException;
@@ -53,15 +53,11 @@ final class Telegram
 
         foreach ($releases->getAll() as $release) {
 
-            $releaseModel = new RawReleases([
-                'data' => base64_encode(serialize($release)),
+            $releaseModel = new RawReleasesModel([
+                'data' => $release,
                 'status' => RawReleasesStatusEnum::NEW,
             ]);
             $releaseModel->save();
-//            var_dump(
-//                $releaseModel->getAttribute('data'),
-//                $releaseModel->fresh()->getAttribute('data')
-//            );exit;
         }
     }
 
