@@ -17,11 +17,11 @@ use App\Http\Procedures;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::middleware(['auth:api'])->group(function () {
-        Route::rpc('/user', [Procedures\UserProcedure::class])->name('rpc.user');
-        Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class])->name('rpc.raw-releases');
-        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStylesProcedure::class])->name('rpc.unapproved-styles');
-        Route::rpc('/styles', [Procedures\StylesProcedure::class])->name('rpc.styles');
+    Route::middleware(['auth:api', 'permissions'])->group(function () {
+        Route::rpc('/user', [Procedures\UserProcedure::class]);
+        Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class]);
+        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStylesProcedure::class]);
+        Route::rpc('/styles', [Procedures\StylesProcedure::class]);
     });
 });
 

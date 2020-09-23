@@ -3,15 +3,15 @@
 namespace App\Models\Parsers\Telegram;
 
 use App\Models\StylesModel;
-use App\Repositories\StyleRepository;
+use App\Repositories\StylesRepository;
 
 class Style
 {
-    protected StyleRepository $styleRepository;
+    protected StylesRepository $styleRepository;
 
     private ?string $name;
 
-    public function __construct(StyleRepository $styleRepository)
+    public function __construct(StylesRepository $styleRepository)
     {
         $this->styleRepository = $styleRepository;
     }

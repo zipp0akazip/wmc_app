@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
+use App\Http\Requests\StyleCreateRequest;
+use App\Models\Enums\PermissionEnum;
+use App\Models\StylesModel;
+use App\Repositories\StylesRepository;
+use App\Traits\ProcedurePermissionControl;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Sajya\Server\Guide;
@@ -11,6 +16,8 @@ use Sajya\Server\Procedure;
 
 class StylesProcedure extends Procedure
 {
+    use ProcedurePermissionControl;
+
     /**
      * The name of the procedure that will be
      * displayed and taken into account in the search
@@ -19,14 +26,25 @@ class StylesProcedure extends Procedure
      */
     public static string $name = 'styles';
 
-    public function list(): array
+    protected static array $permissions = [
+        'list' => PermissionEnum::StylesList,
+        'create' => PermissionEnum::StylesCreate,
+    ];
+
+    protected StylesRepository $stylesRepository;
+
+    public function __construct(StylesRepository $stylesRepository)
     {
-        var_dump(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));exit;
-        var_dump('list');exit;
+        $this->stylesRepository = $stylesRepository;
     }
 
-    public function create(): array
+    public function list(): array
     {
-        var_dump('create');exit;
+        return $this->stylesRepository->getList();
+    }
+
+    public function create(StyleCreateRequest $request): array
+    {
+        return $this->stylesRepository->create($request);
     }
 }

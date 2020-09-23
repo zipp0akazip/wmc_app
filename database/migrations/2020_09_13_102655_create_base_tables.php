@@ -15,22 +15,22 @@ class CreateBaseTables extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alias');
+            $table->string('name')->unique();
+            $table->string('alias')->unique();
             $table->timestampsTz();
         });
 
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alias');
+            $table->string('name')->unique();
+            $table->string('alias')->unique();
             $table->timestampsTz();
         });
 
         Schema::create('labels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alias');
+            $table->string('name')->unique();
+            $table->string('alias')->unique();
             $table->timestampsTz();
         });
 

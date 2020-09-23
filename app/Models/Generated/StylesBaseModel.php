@@ -10,4 +10,8 @@ class StylesBaseModel extends Model
     use HasFactory;
 
     protected $table = 'styles';
+
+    protected $fillable = [
+        'name', 'alias',
+    ];
 }
