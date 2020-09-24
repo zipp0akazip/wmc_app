@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
-use App\Models\Enums\RawReleasesStatusEnum;
-use App\Models\RawReleasesModel;
+use App\Models\Enums\PermissionEnum;
+use App\Repositories\RawReleasesRepository;
+use App\Traits\ProcedurePermissionControl;
 use Sajya\Server\Procedure;
 
 class RawReleasesProcedure extends Procedure
 {
+    use ProcedurePermissionControl;
+
     /**
      * The name of the procedure that will be
      * displayed and taken into account in the search
@@ -18,15 +21,19 @@ class RawReleasesProcedure extends Procedure
      */
     public static string $name = 'raw-releases';
 
+    protected static array $permissions = [
+        'list' => PermissionEnum::RawReleaseList,
+    ];
+
+    protected RawReleasesRepository $rawReleasesRepository;
+
+    public function __construct(RawReleasesRepository $rawReleasesRepository)
+    {
+        $this->rawReleasesRepository = $rawReleasesRepository;
+    }
+
     public function list(): array
     {
-        $result = [];
-        $releases = RawReleasesModel::where('status', RawReleasesStatusEnum::NEW)->get();
-
-        foreach ($releases as $release) {
-            $result[] = $release->data->toArray();
-        }
-
-        return $result;
+        return $this->rawReleasesRepository->getNewReleases();
     }
 }

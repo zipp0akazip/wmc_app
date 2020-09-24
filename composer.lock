@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca50e984daf67635983513ee3e6f1c10",
+    "content-hash": "3dfe7de2eb8d822b3fcc5bd1c76c69e3",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1104,6 +1104,82 @@
                 "stack"
             ],
             "time": "2020-05-31T07:17:05+00:00"
+        },
+        {
+            "name": "awes-io/repository",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awes-io/repository.git",
+                "reference": "481730fb3a98cda9def65fca86977dd507fc59cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awes-io/repository/zipball/481730fb3a98cda9def65fca86977dd507fc59cd",
+                "reference": "481730fb3a98cda9def65fca86977dd507fc59cd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5|~6|~7|~8"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~7.0",
+                "sempro/phpunit-pretty-print": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AwesIO\\Repository\\RepositoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AwesIO\\Repository\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Awescode GmbH",
+                    "email": "info@awescode.de",
+                    "homepage": "https://www.awescode.de",
+                    "role": "Owner"
+                },
+                {
+                    "name": "Galymzhan Begimov",
+                    "email": "begimov@gmail.com",
+                    "homepage": "https://github.com/begimov"
+                }
+            ],
+            "description": "Implementation of repository pattern for Laravel. The package allows out-of-the-box filtering of data based on parameters in the <b>request</b>, and also allows you to quickly integrate the list filters and custom criteria.",
+            "homepage": "https://github.com/awes-io/repository",
+            "keywords": [
+                "criteria",
+                "filters",
+                "laravel",
+                "pattern",
+                "php",
+                "repository",
+                "scope"
+            ],
+            "funding": [
+                {
+                    "url": "https://opencollective.com/awesdotio",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/awesdotio",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-09-23T09:34:09+00:00"
         },
         {
             "name": "bensampo/laravel-enum",
@@ -11411,11 +11487,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "awes-io/repository": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

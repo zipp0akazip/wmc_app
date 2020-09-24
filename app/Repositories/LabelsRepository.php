@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Models\LabelsModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
-use App\Models\StylesModel;
 use Illuminate\Database\Eloquent\Collection;
 
-class StylesRepository extends BaseRepository
+class LabelsRepository extends BaseRepository
 {
     /**
      * The attributes that can be searched by.
@@ -17,7 +17,7 @@ class StylesRepository extends BaseRepository
 
     public function entity()
     {
-        return StylesModel::class;
+        return LabelsModel::class;
     }
 
     public function isExists(string $name): bool
@@ -37,7 +37,7 @@ class StylesRepository extends BaseRepository
         return $this->entity()::all();
     }
 
-    public function create(array $request): StylesModel
+    public function create(array $request): LabelsModel
     {
         $style = new $this->entity();
         $style->name = $request['name'];

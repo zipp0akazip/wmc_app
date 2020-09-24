@@ -9,9 +9,7 @@ use App\Models\Enums\PermissionEnum;
 use App\Models\StylesModel;
 use App\Repositories\StylesRepository;
 use App\Traits\ProcedurePermissionControl;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Sajya\Server\Guide;
+use Illuminate\Database\Eloquent\Collection;
 use Sajya\Server\Procedure;
 
 class StylesProcedure extends Procedure
@@ -38,13 +36,13 @@ class StylesProcedure extends Procedure
         $this->stylesRepository = $stylesRepository;
     }
 
-    public function list(): array
+    public function list(): Collection
     {
         return $this->stylesRepository->getList();
     }
 
-    public function create(StyleCreateRequest $request): array
+    public function create(StyleCreateRequest $request): StylesModel
     {
-        return $this->stylesRepository->create($request);
+        return $this->stylesRepository->create($request->toArray());
     }
 }

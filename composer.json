@@ -10,7 +10,9 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "awes-io/repository": "dev-master",
         "bensampo/laravel-enum": "^3.0",
+        "danog/madelineproto": "^5.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,8 +20,7 @@
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "sajya/server": "^2.0",
-        "spatie/laravel-permission": "^3.16",
-        "danog/madelineproto": "^5.1"
+        "spatie/laravel-permission": "^3.16"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

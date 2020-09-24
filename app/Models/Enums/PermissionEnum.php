@@ -11,6 +11,9 @@ final class PermissionEnum extends BaseEnum
     const StylesList = 'styles:list';
     const StylesCreate = 'styles:create';
 
+    const LabelsList = 'labels:list';
+    const LabelsCreate = 'labels:create';
+
     const TracksView = 'tracks:view';
     const TracksAdd = 'tracks:add';
 
