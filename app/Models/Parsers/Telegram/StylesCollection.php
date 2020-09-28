@@ -21,7 +21,6 @@ class StylesCollection
 
             $this->add($styleModel);
         }
-
     }
 
     public function add(Style $style): void

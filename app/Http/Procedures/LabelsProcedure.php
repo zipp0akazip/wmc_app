@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
+use App\Http\Requests\LabelCreateRequest;
 use App\Http\Requests\StyleCreateRequest;
 use App\Models\Enums\PermissionEnum;
 use App\Models\LabelsModel;
@@ -42,7 +43,7 @@ class LabelsProcedure extends Procedure
         return $this->labelsRepository->getList();
     }
 
-    public function create(StyleCreateRequest $request): LabelsModel
+    public function create(LabelCreateRequest $request): LabelsModel
     {
         return $this->labelsRepository->create($request->toArray());
     }

@@ -39,7 +39,7 @@ final class Telegram
             'offset_id' => 0,
             'offset_date' => 0,
             'add_offset' => 0,
-            'limit' => 100,
+            'limit' => 19,
             'max_id' => 0,
             'min_id' => 0,
         ];
@@ -50,7 +50,7 @@ final class Telegram
         $messages = array_reverse($data['messages']);
 
         $releases = $this->parser->handleRawMessages($messages);
-
+var_dump($releases->toArray());exit;
         foreach ($releases->getAll() as $release) {
 
             $releaseModel = new RawReleasesModel([
