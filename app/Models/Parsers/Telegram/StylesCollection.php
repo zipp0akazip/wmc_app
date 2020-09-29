@@ -16,7 +16,7 @@ class StylesCollection
         $styles = array_filter($styles, fn($value) => !is_null($value) && $value !== '');
 
         foreach ($styles as $style) {
-            $styleModel = resolve(Style::class);
+            $styleModel = new Style();
             $styleModel->setName($style);
 
             $this->add($styleModel);

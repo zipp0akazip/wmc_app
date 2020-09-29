@@ -28,4 +28,3 @@ Route::prefix('v1')->group(function () {
         Route::rpc('/labels', [Procedures\LabelsProcedure::class]);
     });
 });
-

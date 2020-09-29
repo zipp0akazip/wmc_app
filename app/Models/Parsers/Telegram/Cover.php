@@ -4,11 +4,14 @@ namespace App\Models\Parsers\Telegram;
 
 class Cover
 {
-    private ?int $originalId;
+    const ARTISTS_AND_TRACK_NAME_DELIMITER = '/[—|–|-]+/';
+
+    private int $originalId;
+    private string $originalName;
     private ArtistsCollection $artists;
-    private ?string $name;
-    private ?string $label;
-    private ?string $date;
+    private string $name;
+    private string $label;
+    private string $date;
     private StylesCollection $styles;
 
     public function __construct()
@@ -30,7 +33,8 @@ class Cover
         $handledParts = [];
         foreach ($partsLower as $stringNumber => $stringLower) {
             if (strpos($stringLower, 'label') !== false) {
-                $this->label = explode('#', $parts[$stringNumber])[1];
+                $label = explode('#', $parts[$stringNumber])[1];
+                $this->label = trim($label);
                 $handledParts[] = $stringNumber;
             }
 
@@ -47,9 +51,8 @@ class Cover
         }
 
         $remainingParts = array_diff_key($parts, array_flip($handledParts));
-        $this->executeArtistsAndName(array_shift($remainingParts));
-
-        var_dump($this);exit;
+        $this->originalName = array_shift($remainingParts);
+        $this->executeArtistsAndName();
     }
 
     public function getStylesCollection(): StylesCollection
@@ -61,6 +64,7 @@ class Cover
     {
         return [
             'original_id' => $this->originalId,
+            'original_name' => $this->originalName,
             'artist' => $this->artists,
             'name' => $this->name,
             'label' => $this->label,
@@ -69,39 +73,16 @@ class Cover
         ];
     }
 
-    private function executeArtistsAndName(string $str): void
+    private function executeArtistsAndName(): void
     {
-        list($artists, $name) = preg_split('/[—|–|-]+/', $str);
+        $this->originalName = 'Pegboard Nerds & More Plastic and Kove feat. Pendulum vs Fera - Manifest(feat Defart Qfed)(VIP remix)';
 
-        $artists = preg_split('/(and|vs|&|feat)+/', $artists);
-        $artists = array_map('trim', $artists);
+        list($artists, $name) = preg_split(self::ARTISTS_AND_TRACK_NAME_DELIMITER, $this->originalName);
 
-        foreach ($artists as $position => $artist) {
-            $artistModel = resolve(Artist::class);
-            $artistModel->setName($artist);
-            $artistModel->setPosition($this->artists->getNextPosition());
-
-            $this->artists->add($artistModel);
-        }
-
-        preg_match_all('/\([\w\s]+\)/', $name, $matches, PREG_PATTERN_ORDER);
-
-        foreach ($matches[0] as $match) {
-            $artist = $this->clearArtistName($match);
-            $artistModel = resolve(Artist::class);
-            $artistModel->setName($artist);
-            $artistModel->setPosition($this->artists->getNextPosition());
-
-            $this->artists->add($artistModel);
-
-            $name = str_replace($match, '', $name);
-        }
+        $this->artists->executeArtists($artists);
+        $this->artists->executeArtistsFromTrackName($name);
 
         $this->name = trim($name);
     }
 
-    private function clearArtistName(string $name): string
-    {
-        return trim(str_replace(['(', ')', 'remix', 'Remix', 'feat', '.'], '', $name));
-    }
 }

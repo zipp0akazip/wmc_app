@@ -48,4 +48,3 @@ class LabelsProcedure extends Procedure
         return $this->labelsRepository->create($request->toArray());
     }
 }
-

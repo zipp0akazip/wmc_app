@@ -4,24 +4,33 @@ namespace App\Models\Parsers\Telegram;
 
 class Track
 {
-    private ?int $originalId;
-    private ?string $artist;
-    private ?string $title;
+    private int $originalId;
+    private string $originalName;
+    private ArtistsCollection $artists;
+    private string $title;
+
+    public function __construct()
+    {
+        $this->artists = new ArtistsCollection();
+    }
 
     public function setDataFromMessage(array $message, int $attributeNumber): void
     {
-        $this->originalId = $message['id'];
-
         $data = $message['media']['document']['attributes'][$attributeNumber];
-        $this->artist = $data['performer'];
+
+        $this->originalId = $message['id'];
+        $this->originalName = $data['performer'] . ' - ' . $data['title'];
         $this->title = $data['title'];
+
+        $this->artists->executeArtists($data['performer']);
+        $this->artists->executeArtistsFromTrackName($data['title']);
     }
 
     public function toArray(): array
     {
         return [
             'original_id' => $this->originalId,
-            'artist' => $this->artist,
+            'artists' => $this->artists->toArray(),
             'title' => $this->title,
         ];
     }
