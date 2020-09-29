@@ -10,6 +10,8 @@ final class PermissionEnum extends BaseEnum
 
     const UnapprovedLabelsList = 'unapproved-labels:list';
 
+    const UnapprovedArtistsList = 'unapproved-artists:list';
+
     const StylesList = 'styles:list';
     const StylesCreate = 'styles:create';
 
