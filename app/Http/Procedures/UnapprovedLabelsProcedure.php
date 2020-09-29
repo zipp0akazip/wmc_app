@@ -9,14 +9,14 @@ use App\Repositories\RawReleasesRepository;
 use App\Traits\ProcedurePermissionControl;
 use Sajya\Server\Procedure;
 
-class UnapprovedStylesProcedure extends Procedure
+class UnapprovedLabelsProcedure extends Procedure
 {
     use ProcedurePermissionControl;
 
-    public static string $name = 'unapproved-styles';
+    public static string $name = 'unapproved-labels';
 
     protected static array $permissions = [
-        'list' => PermissionEnum::UnapprovedStylesList,
+        'list' => PermissionEnum::UnapprovedLabelsList,
     ];
 
     protected RawReleasesRepository $rawReleasesRepository;
@@ -28,6 +28,6 @@ class UnapprovedStylesProcedure extends Procedure
 
     public function list(): array
     {
-        return $this->rawReleasesRepository->getUnapprovedStyles();
+        return $this->rawReleasesRepository->getUnapprovedLabels();
     }
 }

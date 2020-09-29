@@ -60,6 +60,16 @@ class Cover
         return $this->styles;
     }
 
+    public function getArtistsCollection(): ArtistsCollection
+    {
+        return $this->artists;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
     public function toArray(): array
     {
         return [

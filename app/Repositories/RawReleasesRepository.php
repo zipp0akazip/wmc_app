@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Enums\RawReleasesStatusEnum;
 use App\Models\RawReleasesModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class RawReleasesRepository extends BaseRepository
 {
@@ -40,12 +39,36 @@ class RawReleasesRepository extends BaseRepository
 
         foreach ($releases as $release) {
             foreach ($release->data->getCover()->getStylesCollection()->getStyles() as $style) {
-                if (!$style->isExists()) {
-                    $result[] = $style->getName();
+                if (!$style->isExists() && !isset($result[$style->getName()])) {
+                    $result[$style->getName()] = [
+                        'name' => $style->getName(),
+                        'release' => $release->data->toArray(),
+                    ];
                 }
             }
         }
 
-        return array_values(array_unique($result));
+        return array_values($result);
+    }
+
+    public function getUnapprovedLabels(): array
+    {
+        $result = [];
+        $labelRepository = resolve(LabelsRepository::class);
+        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+
+        foreach ($releases as $release) {
+            $labelName = $release->data->getCover()->getLabel();
+
+            if (!$labelRepository->isExists($labelName) && !isset($result[$labelName])) {
+                $result[$labelName] = [
+                    'name' => $labelName,
+                    'release' => $release->data->toArray(),
+                ];
+            }
+
+        }
+
+        return array_values($result);
     }
 }

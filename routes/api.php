@@ -24,6 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware(['auth:api', 'permissions'])->group(function () {
         Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class]);
         Route::rpc('/unapproved-styles', [Procedures\UnapprovedStylesProcedure::class]);
+        Route::rpc('/unapproved-labels', [Procedures\UnapprovedLabelsProcedure::class]);
         Route::rpc('/styles', [Procedures\StylesProcedure::class]);
         Route::rpc('/labels', [Procedures\LabelsProcedure::class]);
     });

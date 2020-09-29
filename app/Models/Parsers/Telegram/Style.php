@@ -22,6 +22,15 @@ class Style
 
     public function isExists(): bool
     {
-        return $this->styleRepository->isExists($this->name);
+        return $this->getStyleRepository()->isExists($this->name);
+    }
+
+    private function getStyleRepository(): StylesRepository
+    {
+        if (!isset($this->styleRepository)) {
+            $this->styleRepository = resolve(StylesRepository::class);
+        }
+
+        return $this->styleRepository;
     }
 }

@@ -50,6 +50,11 @@ class ArtistsCollection
         $this->artists[] = $artist;
     }
 
+    public function getArtists(): array
+    {
+        return $this->artists;
+    }
+
     public function getLastPosition(): int
     {
         $position = 0;
