@@ -65,18 +65,16 @@ class Cover
         return [
             'original_id' => $this->originalId,
             'original_name' => $this->originalName,
-            'artist' => $this->artists,
+            'artists' => $this->artists->toArray(),
             'name' => $this->name,
             'label' => $this->label,
             'date' => $this->date,
-            'styles' => $this->styles,
+            'styles' => $this->styles->toArray(),
         ];
     }
 
     private function executeArtistsAndName(): void
     {
-        $this->originalName = 'Pegboard Nerds & More Plastic and Kove feat. Pendulum vs Fera - Manifest(feat Defart Qfed)(VIP remix)';
-
         list($artists, $name) = preg_split(self::ARTISTS_AND_TRACK_NAME_DELIMITER, $this->originalName);
 
         $this->artists->executeArtists($artists);
@@ -84,5 +82,4 @@ class Cover
 
         $this->name = trim($name);
     }
-
 }

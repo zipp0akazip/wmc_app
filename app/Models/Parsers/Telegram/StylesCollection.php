@@ -38,7 +38,7 @@ class StylesCollection
         $result = [];
 
         foreach ($this->styles as $style) {
-            $result[] = $style->toArray();
+            $result[] = $style->getName();
         }
 
         return $result;

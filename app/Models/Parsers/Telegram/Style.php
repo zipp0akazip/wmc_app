@@ -8,7 +8,7 @@ class Style
 {
     protected StylesRepository $styleRepository;
 
-    private ?string $name;
+    private string $name;
 
     public function setName(string $name): void
     {
