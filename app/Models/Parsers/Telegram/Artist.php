@@ -13,6 +13,11 @@ class Artist
         $this->name = $name;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     public function setPosition(?int $position): void
     {
         $this->position = $position;

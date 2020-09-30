@@ -26,6 +26,11 @@ class Track
         $this->artists->executeArtistsFromTrackName($data['title']);
     }
 
+    public function getArtistsCollection(): ArtistsCollection
+    {
+        return $this->artists;
+    }
+
     public function toArray(): array
     {
         return [

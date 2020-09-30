@@ -29,6 +29,6 @@ class UnapprovedArtistsProcedure extends Procedure
 
     public function list(): array
     {
-        return [123];
+        return $this->rawReleasesRepository->getUnapprovedArtists();
     }
 }

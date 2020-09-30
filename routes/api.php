@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Enums\PermissionEnum;
 use App\Http\Procedures;
 
 /*

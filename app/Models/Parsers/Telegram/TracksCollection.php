@@ -11,6 +11,11 @@ class TracksCollection
         $this->tracks[] = $track;
     }
 
+    public function getTracks(): array
+    {
+        return $this->tracks;
+    }
+
     public function toArray(): array
     {
         $result = [];

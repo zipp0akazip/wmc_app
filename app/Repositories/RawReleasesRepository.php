@@ -71,4 +71,39 @@ class RawReleasesRepository extends BaseRepository
 
         return array_values($result);
     }
+
+    public function getUnapprovedArtists(): array
+    {
+        $result = [];
+        $artistsRepository = resolve(ArtistsRepository::class);
+        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+
+        foreach ($releases as $release) {
+            foreach ($release->data->getCover()->getArtistsCollection()->getArtists() as $artist) {
+                $artist = $artist->getName();
+
+                if (!$artistsRepository->isExists($artist) && !isset($result[$artist])) {
+                    $result[$artist] = [
+                        'name' => $artist,
+                        'release' => $release->data->toArray(),
+                    ];
+                }
+            }
+
+            foreach ($release->data->getTracksCollection()->getTracks() as $track) {
+                foreach ($track->getArtistsCollection()->getArtists() as $artist) {
+                    $artist = $artist->getName();
+
+                    if (!$artistsRepository->isExists($artist) && !isset($result[$artist])) {
+                        $result[$artist] = [
+                            'name' => $artist,
+                            'release' => $release->data->toArray(),
+                        ];
+                    }
+                }
+            }
+        }
+
+        return array_values($result);
+    }
 }
