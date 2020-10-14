@@ -19,6 +19,13 @@ class UserProcedure extends Procedure
 
     public function get(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+        $result = $user->toArray();
+
+        foreach ($user->getAllPermissions() as $permission) {
+            $result['permissions'][] = $permission->name;
+        }
+
+        return $result;
     }
 }
