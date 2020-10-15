@@ -2,24 +2,23 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Enums\RoleEnum;
 use Illuminate\Console\Command;
 
-class RolePermissionFresh extends Command
+class Test extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'role_permission:fresh';
+    protected $signature = 'test';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update all roles and permission mapping';
+    protected $description = 'For tests';
 
     /**
      * Create a new command instance.
@@ -38,6 +37,6 @@ class RolePermissionFresh extends Command
      */
     public function handle()
     {
-//        $roles = RoleEnum::asArray();
+
     }
 }

@@ -1,8 +1,11 @@
 <?php
 
+use App\Helpers\Alias;
+use App\Models\StylesModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateBaseTables extends Migration
 {
@@ -16,23 +19,33 @@ class CreateBaseTables extends Migration
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('alias')->unique();
+            $table->string('aliases')->unique();
             $table->timestampsTz();
         });
+        DB::statement(
+            'alter table artists alter column aliases type varchar(255)[] using aliases::varchar(255)[]'
+        );
 
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('alias')->unique();
+            $table->string('aliases')->unique();
+            $table->nestedSet();
             $table->timestampsTz();
         });
+        DB::statement(
+            'alter table styles alter column aliases type varchar(50)[] using aliases::varchar(50)[]'
+        );
 
         Schema::create('labels', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('alias')->unique();
+            $table->string('aliases')->unique();
             $table->timestampsTz();
         });
+        DB::statement(
+            'alter table labels alter column aliases type varchar(50)[] using aliases::varchar(50)[]'
+        );
 
         Schema::create('releases', function (Blueprint $table) {
             $table->id();
@@ -119,6 +132,8 @@ class CreateBaseTables extends Migration
 
             $table->primary(['track_id', 'release_id'], 'track_has_releases_track_id_release_id_primary');
         });
+
+        $this->fillStyles();
     }
 
     /**
@@ -145,5 +160,52 @@ class CreateBaseTables extends Migration
         Schema::dropIfExists('labels');
 
         Schema::dropIfExists('releases');
+    }
+
+    private function fillStyles(): void
+    {
+        $filePath = resource_path('styles_tree.yaml');
+        $tree = yaml_parse_file($filePath);
+
+        $this->handleTree($tree);
+    }
+
+    public function handleTree(array $tree, StylesModel $parent = null)
+    {
+        if ($parent === null) {
+            $parent = new StylesModel([
+                'name' => 'root',
+                'aliases' => '',
+            ]);
+            $parent->save();
+        }
+
+        foreach ($tree as $name => $node) {
+            if (is_array($node) && is_string($name)) {
+                $nodeModel = new StylesModel([
+                    'name' => $name,
+                    'aliases' => Alias::make($name),
+                ]);
+                $nodeModel->save();
+
+                if ($parent !== null) {
+                    $parent->appendNode($nodeModel);
+                }
+
+                $this->handleTree($node, $nodeModel);
+            } elseif (is_string($node)) {
+                $nodeModel = new StylesModel([
+                    'name' => $node,
+                    'aliases' => Alias::make($node),
+                ]);
+                $nodeModel->save();
+
+                if ($parent !== null) {
+                    $parent->appendNode($nodeModel);
+                }
+            } else {
+                $this->handleTree($node, $parent);
+            }
+        }
     }
 }
