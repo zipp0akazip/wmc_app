@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Alias;
 use AwesIO\Repository\Eloquent\BaseRepository;
 use App\Models\StylesModel;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,13 +24,8 @@ class StylesRepository extends BaseRepository
     public function isExists(string $name): bool
     {
         return $this->entity()::where('name', $name)
-            ->orWhere('alias', $this->nameToAlias($name))
+            ->orWhereRaw('\'' . Alias::make($name) . '\'' . ' = ANY(aliases)')
             ->exists();
-    }
-
-    public function nameToAlias(string $name): string
-    {
-        return strtolower($name);
     }
 
     public function getList(): Collection
@@ -41,7 +37,7 @@ class StylesRepository extends BaseRepository
     {
         $style = new $this->entity();
         $style->name = $request['name'];
-        $style->alias = $this->nameToAlias($request['name']);
+        $style->alias = Alias::make($request['name']);
         $style->save();
 
         return $style;

@@ -38,7 +38,7 @@ class Cover
                 $handledParts[] = $stringNumber;
             }
 
-            if (strpos($stringLower, 'date') !== false) {
+            if (strpos($stringLower, 'date') !== false || strpos($stringLower, 'released') !== false) {
                 $this->date = trim(explode(':', $parts[$stringNumber])[1]);
                 $handledParts[] = $stringNumber;
             }
