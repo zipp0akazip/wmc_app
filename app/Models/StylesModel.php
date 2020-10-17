@@ -17,4 +17,6 @@ class StylesModel extends Generated\StylesBaseModel
     protected $casts = [
         'aliases' => PgArray::class
     ];
+
+    protected $hidden = ['_lft', '_rgt', 'parent_id', 'created_at', 'updated_at', 'depth'];
 }

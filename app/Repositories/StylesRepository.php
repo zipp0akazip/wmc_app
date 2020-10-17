@@ -30,7 +30,7 @@ class StylesRepository extends BaseRepository
 
     public function getList(): Collection
     {
-        return $this->entity()::all();
+        return $this->entity()::all()->toTree();
     }
 
     public function create(array $request): StylesModel
