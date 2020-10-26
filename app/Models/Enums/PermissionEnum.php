@@ -21,6 +21,8 @@ final class PermissionEnum extends BaseEnum
     const TracksView = 'tracks:view';
     const TracksAdd = 'tracks:add';
 
+    const AdminMenuView = 'admin-menu:view';
+
     private static array $rolePermissionMapping = [
         RoleEnum::User => [
             self::TracksView
