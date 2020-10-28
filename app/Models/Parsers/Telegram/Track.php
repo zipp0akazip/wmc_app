@@ -37,6 +37,7 @@ class Track
             'original_id' => $this->originalId,
             'artists' => $this->artists->toArray(),
             'title' => $this->title,
+            'original_name' => $this->originalName,
         ];
     }
 }
