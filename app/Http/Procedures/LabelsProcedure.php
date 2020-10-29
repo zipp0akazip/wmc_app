@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
+use App\Http\Requests\LabelAddAliasRequest;
 use App\Http\Requests\LabelCreateRequest;
-use App\Http\Requests\StyleCreateRequest;
 use App\Models\Enums\PermissionEnum;
 use App\Models\LabelsModel;
-use App\Models\StylesModel;
 use App\Repositories\LabelsRepository;
 use App\Traits\ProcedurePermissionControl;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,6 +28,7 @@ class LabelsProcedure extends Procedure
     protected static array $permissions = [
         'list' => PermissionEnum::LabelsList,
         'create' => PermissionEnum::LabelsCreate,
+        'addAlias' => PermissionEnum::LabelsAddAlias,
     ];
 
     protected LabelsRepository $labelsRepository;
@@ -46,5 +46,10 @@ class LabelsProcedure extends Procedure
     public function create(LabelCreateRequest $request): LabelsModel
     {
         return $this->labelsRepository->create($request->toArray());
+    }
+
+    public function addAlias(LabelAddAliasRequest $request): LabelsModel
+    {
+        return $this->labelsRepository->addAlias($request);
     }
 }

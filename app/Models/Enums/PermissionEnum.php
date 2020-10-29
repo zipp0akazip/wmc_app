@@ -17,6 +17,7 @@ final class PermissionEnum extends BaseEnum
 
     const LabelsList = 'labels:list';
     const LabelsCreate = 'labels:create';
+    const LabelsAddAlias  = 'labels:add-alias';
 
     const TracksView = 'tracks:view';
     const TracksAdd = 'tracks:add';
