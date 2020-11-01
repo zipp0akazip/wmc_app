@@ -1,7 +1,7 @@
 <?php
 
 use App\Helpers\Alias;
-use App\Models\StylesModel;
+use App\Models\StyleModel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -170,10 +170,10 @@ class CreateBaseTables extends Migration
         $this->handleTree($tree);
     }
 
-    public function handleTree(array $tree, StylesModel $parent = null)
+    public function handleTree(array $tree, StyleModel $parent = null)
     {
         if ($parent === null) {
-            $parent = new StylesModel([
+            $parent = new StyleModel([
                 'name' => 'root',
                 'aliases' => '',
             ]);
@@ -182,7 +182,7 @@ class CreateBaseTables extends Migration
 
         foreach ($tree as $name => $node) {
             if (is_array($node) && is_string($name)) {
-                $nodeModel = new StylesModel([
+                $nodeModel = new StyleModel([
                     'name' => $name,
                     'aliases' => Alias::make($name),
                 ]);
@@ -194,7 +194,7 @@ class CreateBaseTables extends Migration
 
                 $this->handleTree($node, $nodeModel);
             } elseif (is_string($node)) {
-                $nodeModel = new StylesModel([
+                $nodeModel = new StyleModel([
                     'name' => $node,
                     'aliases' => Alias::make($node),
                 ]);

@@ -2,7 +2,7 @@
 
 namespace App\Models\Enums;
 
-class RawReleasesStatusEnum extends BaseEnum
+class RawReleaseStatusEnum extends BaseEnum
 {
     const NEW = 'new';
     const HANDLED = 'handled';

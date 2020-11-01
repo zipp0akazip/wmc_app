@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Helpers\Alias;
-use App\Models\ArtistsModel;
+use App\Models\ArtistModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
 
-class ArtistsRepository extends BaseRepository
+class ArtistRepository extends BaseRepository
 {
     /**
      * The attributes that can be searched by.
@@ -17,7 +17,7 @@ class ArtistsRepository extends BaseRepository
 
     public function entity()
     {
-        return ArtistsModel::class;
+        return ArtistModel::class;
     }
 
     public function isExists(string $name): bool

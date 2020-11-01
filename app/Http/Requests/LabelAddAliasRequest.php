@@ -24,7 +24,7 @@ class LabelAddAliasRequest extends FormRequest
     public function rules()
     {
         return [
-            'label_id' => 'required|exists:App\Models\LabelsModel,id',
+            'label_id' => 'required|exists:' . \App\Models\LabelModel::class . ',id',
             'alias' => 'required|min:3'
         ];
     }

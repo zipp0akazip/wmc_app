@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Generated;
 
-class RawReleasesModel extends Generated\RawReleasesBaseModel
+class RawReleaseModel extends Generated\RawReleaseBaseModel
 {
     public function getDataAttribute($value)
     {

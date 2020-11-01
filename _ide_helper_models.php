@@ -20,15 +20,15 @@ namespace App\Models{
  * @property string|null $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel query()
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereRelease($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RawReleasesModel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereRelease($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RawReleaseModel whereUpdatedAt($value)
  */
 	class RawReleases extends \Eloquent {}
 }

@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Models\Enums\RawReleasesStatusEnum;
-use App\Models\RawReleasesModel;
+use App\Models\Enums\RawReleaseStatusEnum;
+use App\Models\RawReleaseModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
 
-class RawReleasesRepository extends BaseRepository
+class RawReleaseRepository extends BaseRepository
 {
     /**
      * The attributes that can be searched by.
@@ -17,13 +17,13 @@ class RawReleasesRepository extends BaseRepository
 
     public function entity()
     {
-        return RawReleasesModel::class;
+        return RawReleaseModel::class;
     }
 
     public function getNewReleases(): array
     {
         $result = [];
-        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+        $releases = $this->entity()::where('status', RawReleaseStatusEnum::NEW)->get();
 
         foreach ($releases as $release) {
             $result[] = $release->data->toArray();
@@ -35,7 +35,7 @@ class RawReleasesRepository extends BaseRepository
     public function getUnapprovedStyles(): array
     {
         $result = [];
-        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+        $releases = $this->entity()::where('status', RawReleaseStatusEnum::NEW)->get();
 
         foreach ($releases as $release) {
             foreach ($release->data->getCover()->getStylesCollection()->getStyles() as $style) {
@@ -54,8 +54,8 @@ class RawReleasesRepository extends BaseRepository
     public function getUnapprovedLabels(): array
     {
         $result = [];
-        $labelRepository = resolve(LabelsRepository::class);
-        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+        $labelRepository = resolve(LabelRepository::class);
+        $releases = $this->entity()::where('status', RawReleaseStatusEnum::NEW)->get();
 
         foreach ($releases as $release) {
             $labelName = $release->data->getCover()->getLabel();
@@ -75,8 +75,8 @@ class RawReleasesRepository extends BaseRepository
     public function getUnapprovedArtists(): array
     {
         $result = [];
-        $artistsRepository = resolve(ArtistsRepository::class);
-        $releases = $this->entity()::where('status', RawReleasesStatusEnum::NEW)->get();
+        $artistsRepository = resolve(ArtistRepository::class);
+        $releases = $this->entity()::where('status', RawReleaseStatusEnum::NEW)->get();
 
         foreach ($releases as $release) {
             foreach ($release->data->getCover()->getArtistsCollection()->getArtists() as $artist) {

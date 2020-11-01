@@ -7,13 +7,13 @@ namespace App\Http\Procedures;
 use App\Http\Requests\LabelAddAliasRequest;
 use App\Http\Requests\LabelCreateRequest;
 use App\Models\Enums\PermissionEnum;
-use App\Models\LabelsModel;
-use App\Repositories\LabelsRepository;
+use App\Models\LabelModel;
+use App\Repositories\LabelRepository;
 use App\Traits\ProcedurePermissionControl;
 use Illuminate\Database\Eloquent\Collection;
 use Sajya\Server\Procedure;
 
-class LabelsProcedure extends Procedure
+class LabelProcedure extends Procedure
 {
     use ProcedurePermissionControl;
 
@@ -23,7 +23,7 @@ class LabelsProcedure extends Procedure
      *
      * @var string
      */
-    public static string $name = 'labels';
+    public static string $name = 'label';
 
     protected static array $permissions = [
         'list' => PermissionEnum::LabelsList,
@@ -31,25 +31,25 @@ class LabelsProcedure extends Procedure
         'addAlias' => PermissionEnum::LabelsAddAlias,
     ];
 
-    protected LabelsRepository $labelsRepository;
+    protected LabelRepository $labelRepository;
 
-    public function __construct(LabelsRepository $labelsRepository)
+    public function __construct(LabelRepository $labelsRepository)
     {
-        $this->labelsRepository = $labelsRepository;
+        $this->labelRepository = $labelsRepository;
     }
 
     public function list(): Collection
     {
-        return $this->labelsRepository->getList();
+        return $this->labelRepository->getList();
     }
 
-    public function create(LabelCreateRequest $request): LabelsModel
+    public function create(LabelCreateRequest $request): LabelModel
     {
-        return $this->labelsRepository->create($request->toArray());
+        return $this->labelRepository->create($request->toArray());
     }
 
-    public function addAlias(LabelAddAliasRequest $request): LabelsModel
+    public function addAlias(LabelAddAliasRequest $request): LabelModel
     {
-        return $this->labelsRepository->addAlias($request);
+        return $this->labelRepository->addAlias($request);
     }
 }

@@ -4,11 +4,11 @@ namespace App\Repositories;
 
 use App\Helpers\Alias;
 use App\Http\Requests\LabelAddAliasRequest;
-use App\Models\LabelsModel;
+use App\Models\LabelModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
 
-class LabelsRepository extends BaseRepository
+class LabelRepository extends BaseRepository
 {
     /**
      * The attributes that can be searched by.
@@ -19,7 +19,7 @@ class LabelsRepository extends BaseRepository
 
     public function entity()
     {
-        return LabelsModel::class;
+        return LabelModel::class;
     }
 
     public function isExists(string $name): bool
@@ -34,7 +34,7 @@ class LabelsRepository extends BaseRepository
         return $this->entity()::all();
     }
 
-    public function create(array $request): LabelsModel
+    public function create(array $request): LabelModel
     {
         $label = new $this->entity();
         $label->name = $request['name'];
@@ -44,10 +44,10 @@ class LabelsRepository extends BaseRepository
         return $label;
     }
 
-    public function addAlias(LabelAddAliasRequest $request): LabelsModel
+    public function addAlias(LabelAddAliasRequest $request): LabelModel
     {
         $label = $this->entity()::find($request->get('label_id'));
-        $label->aliases->add($request->get('alias'));
+        $label->aliases->add(Alias::make($request->get('alias')));
         $label->save();
 
         return $label;

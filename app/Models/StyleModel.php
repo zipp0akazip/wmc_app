@@ -10,7 +10,7 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * @property Collection $aliases
  */
-class StylesModel extends Generated\StylesBaseModel
+class StyleModel extends Generated\StyleBaseModel
 {
     use NodeTrait;
 

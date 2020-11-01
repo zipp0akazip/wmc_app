@@ -4,10 +4,10 @@ namespace App\Repositories;
 
 use App\Helpers\Alias;
 use AwesIO\Repository\Eloquent\BaseRepository;
-use App\Models\StylesModel;
+use App\Models\StyleModel;
 use Illuminate\Database\Eloquent\Collection;
 
-class StylesRepository extends BaseRepository
+class StyleRepository extends BaseRepository
 {
     /**
      * The attributes that can be searched by.
@@ -18,7 +18,7 @@ class StylesRepository extends BaseRepository
 
     public function entity()
     {
-        return StylesModel::class;
+        return StyleModel::class;
     }
 
     public function isExists(string $name): bool
@@ -33,7 +33,7 @@ class StylesRepository extends BaseRepository
         return $this->entity()::all()->toTree();
     }
 
-    public function create(array $request): StylesModel
+    public function create(array $request): StyleModel
     {
         $style = new $this->entity();
         $style->name = $request['name'];

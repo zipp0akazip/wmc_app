@@ -16,7 +16,7 @@ class CreateTableRawReleases extends Migration
         Schema::create('raw_releases', function (Blueprint $table) {
             $table->id();
             $table->text('data');
-            $table->enum('status', \App\Models\Enums\RawReleasesStatusEnum::asArray());
+            $table->enum('status', \App\Models\Enums\RawReleaseStatusEnum::asArray());
             $table->text('message')->nullable();
             $table->timestampsTz();
         });

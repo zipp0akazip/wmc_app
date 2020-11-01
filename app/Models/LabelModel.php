@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Casts\PgArray;
-use App\Models\Generated\LabelsBaseModel;
+use App\Models\Generated\LabelBaseModel;
 
-class LabelsModel extends LabelsBaseModel
+class LabelModel extends LabelBaseModel
 {
     protected $casts = [
         'aliases' => PgArray::class

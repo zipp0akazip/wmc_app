@@ -24,7 +24,7 @@ class LabelCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|unique:App\Models\LabelsModel,name'
+            'name' => 'required|min:3|unique:' . \App\Models\LabelModel::class . ',name'
         ];
     }
 }

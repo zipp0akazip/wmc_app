@@ -20,11 +20,11 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware(['auth:api', 'permissions'])->group(function () {
-        Route::rpc('/raw-releases', [Procedures\RawReleasesProcedure::class]);
-        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStylesProcedure::class]);
-        Route::rpc('/unapproved-labels', [Procedures\UnapprovedLabelsProcedure::class]);
-        Route::rpc('/unapproved-artists', [Procedures\UnapprovedArtistsProcedure::class]);
-        Route::rpc('/styles', [Procedures\StylesProcedure::class]);
-        Route::rpc('/labels', [Procedures\LabelsProcedure::class]);
+        Route::rpc('/raw-releases', [Procedures\RawReleaseProcedure::class]);
+        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStyleProcedure::class]);
+        Route::rpc('/unapproved-labels', [Procedures\UnapprovedLabelProcedure::class]);
+        Route::rpc('/unapproved-artists', [Procedures\UnapprovedArtistProcedure::class]);
+        Route::rpc('/styles', [Procedures\StyleProcedure::class]);
+        Route::rpc('/labels', [Procedures\LabelProcedure::class]);
     });
 });

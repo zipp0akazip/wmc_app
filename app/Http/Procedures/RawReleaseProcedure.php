@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Procedures;
 
 use App\Models\Enums\PermissionEnum;
-use App\Repositories\RawReleasesRepository;
+use App\Repositories\RawReleaseRepository;
 use App\Traits\ProcedurePermissionControl;
 use Sajya\Server\Procedure;
 
-class RawReleasesProcedure extends Procedure
+class RawReleaseProcedure extends Procedure
 {
     use ProcedurePermissionControl;
 
@@ -19,21 +19,21 @@ class RawReleasesProcedure extends Procedure
      *
      * @var string
      */
-    public static string $name = 'raw-releases';
+    public static string $name = 'raw-release';
 
     protected static array $permissions = [
         'list' => PermissionEnum::RawReleaseList,
     ];
 
-    protected RawReleasesRepository $rawReleasesRepository;
+    protected RawReleaseRepository $rawReleaseRepository;
 
-    public function __construct(RawReleasesRepository $rawReleasesRepository)
+    public function __construct(RawReleaseRepository $rawReleasesRepository)
     {
-        $this->rawReleasesRepository = $rawReleasesRepository;
+        $this->rawReleaseRepository = $rawReleasesRepository;
     }
 
     public function list(): array
     {
-        return $this->rawReleasesRepository->getNewReleases();
+        return $this->rawReleaseRepository->getNewReleases();
     }
 }

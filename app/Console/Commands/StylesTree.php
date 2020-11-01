@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\StylesModel;
+use App\Models\StyleModel;
 use Illuminate\Console\Command;
 
 class StylesTree extends Command
@@ -41,7 +41,7 @@ class StylesTree extends Command
         $find = $this->option('find');
 
         if ($find !== null && !empty($find)) {
-            $nodes = StylesModel::withDepth()
+            $nodes = StyleModel::withDepth()
                 ->with('ancestors')
                 ->where('name', 'ilike', '%' . $find . '%')
                 ->get();
@@ -56,7 +56,7 @@ var_dump($nodes->toArray());exit;
 //            var_dump($nodes->toArray());
 //            exit;
          } else {
-            $nodes = StylesModel::withDepth()->get()->toTree();
+            $nodes = StyleModel::withDepth()->get()->toTree();
         }
 
         $this->dumpNode($nodes);

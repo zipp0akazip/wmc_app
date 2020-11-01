@@ -12,18 +12,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Track[] $tracks
  */
-class LabelsBaseModel extends Model
+class ArtistBaseModel extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
-    protected $table = 'labels';
+    protected $table = 'artists';
 
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -38,6 +38,6 @@ class LabelsBaseModel extends Model
      */
     public function tracks()
     {
-        return $this->belongsToMany('App\Models\Generated\Track', 'track_has_labels');
+        return $this->belongsToMany('App\Models\Generated\Track', 'track_has_artists');
     }
 }

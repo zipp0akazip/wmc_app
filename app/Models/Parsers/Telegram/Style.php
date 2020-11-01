@@ -2,11 +2,11 @@
 
 namespace App\Models\Parsers\Telegram;
 
-use App\Repositories\StylesRepository;
+use App\Repositories\StyleRepository;
 
 class Style
 {
-    protected StylesRepository $styleRepository;
+    protected StyleRepository $styleRepository;
 
     private string $name;
 
@@ -25,10 +25,10 @@ class Style
         return $this->getStyleRepository()->isExists($this->name);
     }
 
-    private function getStyleRepository(): StylesRepository
+    private function getStyleRepository(): StyleRepository
     {
         if (!isset($this->styleRepository)) {
-            $this->styleRepository = resolve(StylesRepository::class);
+            $this->styleRepository = resolve(StyleRepository::class);
         }
 
         return $this->styleRepository;
