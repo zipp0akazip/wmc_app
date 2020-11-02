@@ -6,21 +6,23 @@ final class PermissionEnum extends BaseEnum
 {
     const RawReleaseList = 'raw-release:list';
 
-    const UnapprovedStylesList = 'unapproved-styles:list';
+    const UnapprovedStylesList = 'unapproved-style:list';
+    const UnapprovedLabelsList = 'unapproved-label:list';
+    const UnapprovedArtistsList = 'unapproved-artist:list';
 
-    const UnapprovedLabelsList = 'unapproved-labels:list';
+    const ArtistList = 'artist:list';
+    const ArtistCreate = 'artist:create';
+    const ArtisAddAlias = 'artist:add-alias';
 
-    const UnapprovedArtistsList = 'unapproved-artists:list';
+    const StylesList = 'style:list';
+    const StylesCreate = 'style:create';
 
-    const StylesList = 'styles:list';
-    const StylesCreate = 'styles:create';
+    const LabelsList = 'label:list';
+    const LabelsCreate = 'label:create';
+    const LabelsAddAlias  = 'label:add-alias';
 
-    const LabelsList = 'labels:list';
-    const LabelsCreate = 'labels:create';
-    const LabelsAddAlias  = 'labels:add-alias';
-
-    const TracksView = 'tracks:view';
-    const TracksAdd = 'tracks:add';
+    const TracksView = 'track:view';
+    const TracksAdd = 'track:add';
 
     const AdminMenuView = 'admin-menu:view';
 

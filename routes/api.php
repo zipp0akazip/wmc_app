@@ -26,5 +26,6 @@ Route::prefix('v1')->group(function () {
         Route::rpc('/unapproved-artists', [Procedures\UnapprovedArtistProcedure::class]);
         Route::rpc('/styles', [Procedures\StyleProcedure::class]);
         Route::rpc('/labels', [Procedures\LabelProcedure::class]);
+        Route::rpc('/artists', [Procedures\ArtistProcedure::class]);
     });
 });

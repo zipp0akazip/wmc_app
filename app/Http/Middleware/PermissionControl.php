@@ -20,17 +20,19 @@ class PermissionControl
     public function handle(Request $request, Closure $next)
     {
         $procedure = $request->route()->parameters()['procedures'][0];
-        $method = explode('@', $request->toArray()['method'])[1];
 
-        if ($this->isProcedureValidForPermissions($procedure)) {
-            $permission = $procedure::getPermissionsForMethod($method);
+        if (isset(explode('@', $request->toArray()['method'])[1])) {
+            $method = explode('@', $request->toArray()['method'])[1];
+            if ($this->isProcedureValidForPermissions($procedure)) {
+                $permission = $procedure::getPermissionsForMethod($method);
 
-            if ($permission && $request->user()->can($permission)) {
-                return $next($request);
-            } else {
-                abort(403, 'Access denied');
+                if ($permission && $request->user()->can($permission)) {
+                    return $next($request);
+                }
             }
         }
+
+        abort(403, 'Access denied');
     }
 
     private function isProcedureValidForPermissions($procedure): bool
