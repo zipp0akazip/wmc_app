@@ -13,19 +13,15 @@ use App\Http\Procedures;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::prefix('v1')->group(function () {
-    Route::middleware(['auth:api'])->group(function () {
-        Route::rpc('/user', [Procedures\UserProcedure::class]);
-    });
-
-    Route::middleware(['auth:api', 'permissions'])->group(function () {
-        Route::rpc('/raw-releases', [Procedures\RawReleaseProcedure::class]);
-        Route::rpc('/unapproved-styles', [Procedures\UnapprovedStyleProcedure::class]);
-        Route::rpc('/unapproved-labels', [Procedures\UnapprovedLabelProcedure::class]);
-        Route::rpc('/unapproved-artists', [Procedures\UnapprovedArtistProcedure::class]);
-        Route::rpc('/styles', [Procedures\StyleProcedure::class]);
-        Route::rpc('/labels', [Procedures\LabelProcedure::class]);
-        Route::rpc('/artists', [Procedures\ArtistProcedure::class]);
-    });
+Route::middleware(['auth:api'])->group(function () {
+    Route::rpc('/v1', [
+        Procedures\ArtistProcedure::class,
+        Procedures\LabelProcedure::class,
+        Procedures\RawReleaseProcedure::class,
+        Procedures\StyleProcedure::class,
+        Procedures\UnapprovedArtistProcedure::class,
+        Procedures\UnapprovedLabelProcedure::class,
+        Procedures\UnapprovedStyleProcedure::class,
+        Procedures\UserProcedure::class,
+    ]);
 });

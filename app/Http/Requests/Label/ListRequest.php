@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Label;
 
+use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LabelCreateRequest extends FormRequest
+class ListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class LabelCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can(PermissionEnum::LabelList);
     }
 
     /**
@@ -23,8 +24,6 @@ class LabelCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|unique:' . \App\Models\LabelModel::class . ',name'
-        ];
+        return [];
     }
 }

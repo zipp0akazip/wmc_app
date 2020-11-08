@@ -4,31 +4,31 @@ namespace App\Models\Enums;
 
 final class PermissionEnum extends BaseEnum
 {
-    const RawReleaseList = 'raw-release:list';
-
-    const UnapprovedStylesList = 'unapproved-style:list';
-    const UnapprovedLabelsList = 'unapproved-label:list';
-    const UnapprovedArtistsList = 'unapproved-artist:list';
+    const AdminMenuView = 'admin-menu:view';
 
     const ArtistList = 'artist:list';
     const ArtistCreate = 'artist:create';
-    const ArtisAddAlias = 'artist:add-alias';
+    const ArtistAddAlias = 'artist:add-alias';
 
-    const StylesList = 'style:list';
-    const StylesCreate = 'style:create';
+    const LabelList = 'label:list';
+    const LabelCreate = 'label:create';
+    const LabelAddAlias  = 'label:add-alias';
 
-    const LabelsList = 'label:list';
-    const LabelsCreate = 'label:create';
-    const LabelsAddAlias  = 'label:add-alias';
+    const RawReleaseList = 'raw-release:list';
 
-    const TracksView = 'track:view';
-    const TracksAdd = 'track:add';
+    const StyleList = 'style:list';
+    const StyleCreate = 'style:create';
 
-    const AdminMenuView = 'admin-menu:view';
+    const UnapprovedArtistList = 'unapproved-artist:list';
+    const UnapprovedLabelList = 'unapproved-label:list';
+    const UnapprovedStyleList = 'unapproved-style:list';
+
+    const TrackView = 'track:view';
+    const TrackAdd = 'track:add';
 
     private static array $rolePermissionMapping = [
         RoleEnum::User => [
-            self::TracksView
+            self::TrackView
         ]
     ];
 

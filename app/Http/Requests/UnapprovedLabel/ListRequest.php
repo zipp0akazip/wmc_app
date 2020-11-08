@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\UnapprovedLabel;
 
+use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LabelAddAliasRequest extends FormRequest
+class ListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class LabelAddAliasRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can(PermissionEnum::UnapprovedLabelList);
     }
 
     /**
@@ -23,9 +24,6 @@ class LabelAddAliasRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'label_id' => 'required|exists:' . \App\Models\LabelModel::class . ',id',
-            'alias' => 'required|min:3'
-        ];
+        return [];
     }
 }

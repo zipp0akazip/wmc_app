@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Helpers\Alias;
-use App\Http\Requests\ArtistAddAliasRequest;
+use App\Http\Requests\Artist\AddAliasRequest;
 use App\Models\ArtistModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -44,7 +44,7 @@ class ArtistRepository extends BaseRepository
         return $label;
     }
 
-    public function addAlias(ArtistAddAliasRequest $request): ArtistModel
+    public function addAlias(AddAliasRequest $request): ArtistModel
     {
         $label = $this->entity()::find($request->get('artist_id'));
         $label->aliases->add(Alias::make($request->get('alias')));

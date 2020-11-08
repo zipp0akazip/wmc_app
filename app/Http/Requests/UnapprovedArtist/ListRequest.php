@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\UnapprovedArtist;
 
+use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StyleCreateRequest extends FormRequest
+class ListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class StyleCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can(PermissionEnum::UnapprovedArtistList);
     }
 
     /**
@@ -23,8 +24,6 @@ class StyleCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|unique:App\Models\StylesModel,name'
-        ];
+        return [];
     }
 }

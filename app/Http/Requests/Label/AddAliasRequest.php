@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Label;
 
+use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArtistAddAliasRequest extends FormRequest
+class AddAliasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class ArtistAddAliasRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can(PermissionEnum::LabelAddAlias);
     }
 
     /**
@@ -24,7 +25,7 @@ class ArtistAddAliasRequest extends FormRequest
     public function rules()
     {
         return [
-            'artist_id' => 'required|exists:' . \App\Models\ArtistModel::class . ',id',
+            'label_id' => 'required|exists:' . \App\Models\LabelModel::class . ',id',
             'alias' => 'required|min:3'
         ];
     }
