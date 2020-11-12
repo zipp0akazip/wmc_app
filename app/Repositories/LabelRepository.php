@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Helpers\Alias;
-use App\Http\Requests\Label\AddAliasRequest;
 use App\Models\LabelModel;
 use AwesIO\Repository\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -34,20 +33,20 @@ class LabelRepository extends BaseRepository
         return $this->entity()::all();
     }
 
-    public function create(array $request): LabelModel
+    public function createNew(string $name): LabelModel
     {
         $label = new $this->entity();
-        $label->name = $request['name'];
-        $label->aliases = Alias::make($request['name']);
+        $label->name = $name;
+        $label->aliases = Alias::make($name);
         $label->save();
 
         return $label;
     }
 
-    public function addAlias(AddAliasRequest $request): LabelModel
+    public function addAlias(int $labelId, string $alias): LabelModel
     {
-        $label = $this->entity()::find($request->get('label_id'));
-        $label->aliases->add(Alias::make($request->get('alias')));
+        $label = $this->entity()::find($labelId);
+        $label->aliases->add(Alias::make($alias));
         $label->save();
 
         return $label;

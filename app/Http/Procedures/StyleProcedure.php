@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
+use App\Http\Requests\Style\AddAliasRequest;
 use App\Http\Requests\Style\CreateRequest;
 use App\Http\Requests\Style\ListRequest;
 use App\Models\StyleModel;
@@ -27,8 +28,19 @@ class StyleProcedure extends Procedure
         return $this->styleRepository->getList();
     }
 
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): StyleModel
     {
-//        return $this->stylesRepository->create($request->toArray());
+        return $this->styleRepository->appendNew(
+            $request->get('parent_id'),
+            $request->get('name'),
+        );
+    }
+
+    public function addAlias(AddAliasRequest $request): StyleModel
+    {
+        return $this->styleRepository->addAlias(
+            $request->get('style_id'),
+            $request->get('alias'),
+        );
     }
 }

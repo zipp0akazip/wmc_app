@@ -24,6 +24,9 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'parent_id' => 'required|exists:' . \App\Models\StyleModel::class . ',id',
+            'name' => 'required|min:3|unique:' . \App\Models\StyleModel::class . ',name',
+        ];
     }
 }

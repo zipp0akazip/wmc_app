@@ -30,11 +30,14 @@ class ArtistProcedure extends Procedure
 
     public function create(CreateRequest $request): ArtistModel
     {
-        return $this->artistRepository->create($request->toArray());
+        return $this->artistRepository->createNew($request->get('name'));
     }
 
     public function addAlias(AddAliasRequest $request): ArtistModel
     {
-        return $this->artistRepository->addAlias($request);
+        return $this->artistRepository->addAlias(
+            $request->get('artist_id'),
+            $request->get('alias'),
+        );
     }
 }

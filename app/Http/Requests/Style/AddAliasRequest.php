@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Artist;
+namespace App\Http\Requests\Style;
 
 use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +14,7 @@ class AddAliasRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can(PermissionEnum::ArtistAddAlias);
+        return $this->user()->can(PermissionEnum::StyleAddAlias);
     }
 
     /**
@@ -25,8 +25,8 @@ class AddAliasRequest extends FormRequest
     public function rules()
     {
         return [
-            'artist_id' => 'required|exists:' . \App\Models\ArtistModel::class . ',id',
-            'alias' => 'required|min:3',
+            'style_id' => 'required|exists:' . \App\Models\StyleModel::class . ',id',
+            'alias' => 'required|min:3'
         ];
     }
 }

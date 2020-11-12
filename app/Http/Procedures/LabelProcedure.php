@@ -30,11 +30,14 @@ class LabelProcedure extends Procedure
 
     public function create(CreateRequest $request): LabelModel
     {
-        return $this->labelRepository->create($request->toArray());
+        return $this->labelRepository->createNew($request->get('name'));
     }
 
     public function addAlias(AddAliasRequest $request): LabelModel
     {
-        return $this->labelRepository->addAlias($request);
+        return $this->labelRepository->addAlias(
+            $request->get('label_id'),
+            $request->get('alias'),
+        );
     }
 }

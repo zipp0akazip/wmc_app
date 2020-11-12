@@ -33,13 +33,25 @@ class StyleRepository extends BaseRepository
         return $this->entity()::all()->toTree();
     }
 
-    public function create(array $request): StyleModel
+    public function appendNew(int $parentId, string $name): StyleModel
     {
-        $style = new $this->entity();
-        $style->name = $request['name'];
-        $style->alias = Alias::make($request['name']);
+        $parent = $this->entity()::find($parentId);
+
+        $node = new $this->entity();
+        $node->name = $name;
+        $node->aliases = Alias::make($name);
+        $node->appendToNode($parent)->save();
+
+        return $node;
+    }
+
+    public function addAlias(int $styleId, string $alias): StyleModel
+    {
+        $style = $this->entity()::find($styleId);
+        $style->aliases->add(Alias::make($alias));
         $style->save();
 
         return $style;
     }
 }
+
