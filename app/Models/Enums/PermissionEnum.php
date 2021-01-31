@@ -18,7 +18,9 @@ final class PermissionEnum extends BaseEnum
 
     const StyleList = 'style:list';
     const StyleCreate = 'style:create';
+    const StyleDelete = 'style:delete';
     const StyleAddAlias = 'style:add-alias';
+    const StyleEditAliases = 'style:edit-aliases';
 
     const UnapprovedArtistList = 'unapproved-artist:list';
     const UnapprovedLabelList = 'unapproved-label:list';

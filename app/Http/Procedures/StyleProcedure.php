@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
-use App\Http\Requests\Style\AddAliasRequest;
+use App\Http\Requests\Style\DeleteRequest;
+use App\Http\Requests\Style\EditAliasesRequest;
 use App\Http\Requests\Style\CreateRequest;
 use App\Http\Requests\Style\ListRequest;
 use App\Models\StyleModel;
@@ -36,11 +37,16 @@ class StyleProcedure extends Procedure
         );
     }
 
-    public function addAlias(AddAliasRequest $request): StyleModel
+    public function delete(DeleteRequest $request): bool
     {
-        return $this->styleRepository->addAlias(
+        return $this->styleRepository->delete($request->get('style_id'));
+    }
+
+    public function editAliases(EditAliasesRequest $request): StyleModel
+    {
+        return $this->styleRepository->editAliases(
             $request->get('style_id'),
-            $request->get('alias'),
+            $request->get('aliases'),
         );
     }
 }

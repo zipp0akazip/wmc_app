@@ -45,13 +45,20 @@ class StyleRepository extends BaseRepository
         return $node;
     }
 
-    public function addAlias(int $styleId, string $alias): StyleModel
+    public function editAliases(int $styleId, array $aliases): StyleModel
     {
         $style = $this->entity()::find($styleId);
-        $style->aliases->add(Alias::make($alias));
+        $style->aliases = $aliases;
         $style->save();
 
         return $style;
+    }
+
+    public function delete(int $styleId): bool
+    {
+        $style = $this->entity()::find($styleId);
+
+        return $style->delete();
     }
 }
 

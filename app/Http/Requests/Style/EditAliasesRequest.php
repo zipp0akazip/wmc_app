@@ -5,7 +5,7 @@ namespace App\Http\Requests\Style;
 use App\Models\Enums\PermissionEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddAliasRequest extends FormRequest
+class EditAliasesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class AddAliasRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can(PermissionEnum::StyleAddAlias);
+        return $this->user()->can(PermissionEnum::StyleEditAliases);
     }
 
     /**
@@ -26,7 +26,7 @@ class AddAliasRequest extends FormRequest
     {
         return [
             'style_id' => 'required|exists:' . \App\Models\StyleModel::class . ',id',
-            'alias' => 'required|min:3'
+            'aliases.*' => 'required|min:3'
         ];
     }
 }

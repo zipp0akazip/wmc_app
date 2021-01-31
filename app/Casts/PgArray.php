@@ -30,7 +30,10 @@ class PgArray implements CastsAttributes
     public function set($model, string $key, $value, array $attributes)
     {
         if (!$value instanceof Collection) {
-            $value = collect(array($value));
+            if (!is_array($value)) {
+                $value = array($value);
+            }
+            $value = collect($value);
         }
 
         return '{' . $value->implode(',') . '}';
