@@ -10,7 +10,7 @@ class Cover
     private string $originalName;
     private ArtistsCollection $artists;
     private string $name;
-    private string $label = '';
+    private ?string $label = null;
     private string $date;
     private StylesCollection $styles;
 
