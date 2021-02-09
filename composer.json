@@ -12,6 +12,7 @@
         "ext-json": "*",
         "awes-io/repository": "dev-master",
         "bensampo/laravel-enum": "^3.0",
+        "bramus/ansi-php": "^3.0",
         "danog/madelineproto": "^5.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",

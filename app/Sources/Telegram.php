@@ -39,7 +39,7 @@ final class Telegram
             'offset_id' => 0,
             'offset_date' => 0,
             'add_offset' => 0,
-            'limit' => 19,
+            'limit' => 100000,
             'max_id' => 0,
             'min_id' => 0,
         ];
