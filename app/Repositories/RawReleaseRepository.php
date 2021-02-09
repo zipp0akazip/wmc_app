@@ -60,7 +60,7 @@ class RawReleaseRepository extends BaseRepository
         foreach ($releases as $release) {
             $labelName = $release->data->getCover()->getLabel();
 
-            if (!$labelRepository->isExists($labelName) && !isset($result[$labelName])) {
+            if ($labelName !== null && !$labelRepository->isExists($labelName) && !isset($result[$labelName])) {
                 $result[$labelName] = [
                     'name' => $labelName,
                     'release' => $release->data->toArray(),
