@@ -65,7 +65,7 @@ class Cover
         return $this->artists;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
